@@ -16,7 +16,8 @@ client = OpenAI()
 company_description = "startup building electric bikes in carbon fiber."
 customers = "young professional that have to conmmute, young people that care about the evironment and climate change"
 # the paramenters argument of the function is defined as a a json schema object
-
+def read_file(file_name):
+    return open(file_name).read()
 # ideas_tools =
 my_messages = [
     {
@@ -79,7 +80,7 @@ my_tools2 = [
 my_tool_choice = {"type": "function", "function": {"name": "get_product_idea"}}
 
 completion = client.chat.completions.create(
-    model="gpt-4-turbo",
+    model="gpt-4o",
     response_format={"type": "json_object"},  # always used in
     temperature=0.2,
     messages=my_messages,
@@ -93,3 +94,4 @@ tool_calls_response = completion.choices[0].message.tool_calls
 function_args = json.loads(tool_calls_response[0].function.arguments)
 print(function_args)
 print("finale")
+
